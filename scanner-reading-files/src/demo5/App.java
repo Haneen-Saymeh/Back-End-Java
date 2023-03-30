@@ -21,17 +21,24 @@ public class App {
 			
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found"+ myFile.toString());
+			System.out.println("File not found "+ myFile.toString());
 		} catch (IOException e) {
-		   System.out.println("can't read file" + myFile.toString());
+		   System.out.println("can't read file " + myFile.toString());
 		}
 		 
-		
-		try {
-			br.close();
-		} catch (IOException e) {
-			System.out.println("Unable to close file"+ myFile.toString());
+		//  always run after try and catch, weather excpetion caught or not
+		finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				System.out.println("Unable to close file"+ myFile.toString());
+			}
+			catch(NullPointerException ex) {
+				
+			}
 		}
+		
+		
 
 	}
 
