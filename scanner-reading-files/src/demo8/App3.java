@@ -1,25 +1,23 @@
-package demo7;
+package demo8;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
-public class App {
+public class App3 {
 
 	public static void main(String[] args) {
-		File file= new File("sth.txt");
+		File file= new File("new.txt");
 		// we use try with resources to solve the problems of closing files we use it instead of demo5 code
-		try (BufferedReader br= new BufferedReader(new FileReader(file))){
-			String line;
+		try (BufferedWriter br= new BufferedWriter(new FileWriter(file))){
+			br.write("大家好");
+			br.newLine();
+			br.write("怎么样");
 			
-			while ((line=br.readLine())!=null) {
-				System.out.println(line);
-			}
-			
-		} catch (FileNotFoundException e) {
-			System.out.println("file not found: "+ file.toString());
 		} catch (IOException e) {
 			System.out.println("unable to read: "+file.toString());
 		}
