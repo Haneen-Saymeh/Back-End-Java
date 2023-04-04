@@ -1,0 +1,12 @@
+
+public class App {
+
+	public static void main(String[] args) {
+		Person person1= new Person("Thor");
+		Machine machine1= new Machine("destroyer");
+		person1.showInfo();
+		machine1.showInfo();
+
+	}
+
+}

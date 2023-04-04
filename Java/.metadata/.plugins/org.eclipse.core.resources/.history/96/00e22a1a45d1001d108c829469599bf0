@@ -1,0 +1,14 @@
+package serialization;
+
+public class WriteObjects {
+
+	public static void main(String[] args) {
+		System.out.println("writing objcts....");
+		Person sam= new Person(5,"sam");
+		Person li= new Person(7,"li");
+		
+		
+
+	}
+
+}

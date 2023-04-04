@@ -1,0 +1,11 @@
+package tutorial18;
+import ocean. *;
+public class App {
+
+	public static void main(String[] args) {
+		Fish fish1= new Fish();
+		Dolphin dolphin1= new Dolphin();
+
+	}
+
+}

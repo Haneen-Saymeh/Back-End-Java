@@ -1,0 +1,17 @@
+package tutorial20;
+
+public class App {
+	
+	public static void main(String[] args) {
+		Plant plant1= new Plant();
+		Tree tree1= new Tree();
+		plant1.grow();
+		tree1.grow();
+		Plant plant2= new Tree();
+		plant2.grow();
+		tree1.shedLeaves();
+//		Tree tree2= new Plant();
+	}
+     
+
+}

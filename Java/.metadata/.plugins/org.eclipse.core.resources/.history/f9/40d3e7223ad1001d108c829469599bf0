@@ -1,0 +1,23 @@
+
+public class App {
+
+	public static void main(String[] args) {
+		Animal animal = Animal.Cat;
+		switch(animal) {
+		case Cat:
+			System.out.println("cat");
+			break;
+		case Dog:
+			System.out.println("dog");
+			break;
+		case Mouse:
+			System.out.println("mouse");
+			break;
+		default:
+			break;
+			
+		}
+
+	}
+
+}

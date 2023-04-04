@@ -1,0 +1,15 @@
+
+public enum Animal {
+	Cat, Dog, Mouse;
+	private String name;
+	
+	
+	Animal(){
+		
+	}
+	Animal(String name) {
+		this.name=name;
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package tutorial16;
+
+public class App {
+
+	public static void main(String[] args) {
+		String info= "";
+		info +="Hello, ";
+		info += "My name is Hanin!";
+		System.out.println(info);
+		
+//		more better method is to use string builder
+		StringBuilder s = new StringBuilder();
+		s.append("Hello, ");
+		s.append("my name is Hanin!");
+		System.out.println(s.toString());
+
+	}
+
+}

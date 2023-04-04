@@ -1,0 +1,23 @@
+
+public class Machine{
+	public void start() {
+		System.out.println("Machine is starting ....");
+	}
+}
+
+
+
+public class App {
+
+	public static void main(String[] args) {
+		Machine destroyer= new Machine() {
+			@Override public void start(){
+				System.out.println("Machine destroyer is starting");
+			}
+		};
+		
+		destroyer.start();
+
+	}
+
+}
