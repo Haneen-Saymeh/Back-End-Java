@@ -10,3 +10,8 @@ Dnum int,
 
 alter table Student add salary int
 alter table Student drop column salary
+
+--DML
+--insert/update delete
+insert into Student
+values (1,'han',Null,'alex',Null,Null)
