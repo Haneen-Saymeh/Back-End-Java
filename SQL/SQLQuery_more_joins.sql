@@ -64,9 +64,23 @@ select distinct(M.Fname) as manager, M.Bdate,M.Salary,M.Sex,M.Dno
 from Employee E inner join Employee M 
 on M.SSN=E.Superssn
 
-select * from Employee
-select * from Dependent
 
-select E.Fname +' ' + E.Lname as full_name,E.Bdate, E.Salary, E.Salary, D.Dependent_name,D.Sex,D.Bdate
+
+select E.Fname +' ' + E.Lname as full_name,E.Bdate, E.Salary, E.Salary,ISNULL(D.Dependent_name,'NO DATA'), ISNULL(D.Sex, 'NO DATA'), ISNULL(D.Bdate,0)
 from Employee E left outer join Dependent D
 on E.SSN=D.ESSN
+
+
+select * from Project
+select * from Departments
+
+select P.Pnumber,D.Dname,M.Fname +' ' + M.Lname as manager_name, M.Address,M.Bdate, P.City, D.Dnum
+from Employee E inner join Employee M 
+on M.SSN=E.Superssn
+join Works_for W 
+on M.SSN=W.ESSn
+join Project P 
+on W.Pno=P.Pnumber
+join Departments D 
+on M.Dno=D.Dnum
+where P.City='Cairo'
