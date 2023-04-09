@@ -52,3 +52,25 @@ select COUNT(SSN), Dno
 from Employee
 group by Dno
 having COUNT(SSN)>=3
+
+select SUM(Salary), Dno
+from Employee
+group by Dno 
+having COUNT(SSN) >=3
+
+select SUM(Salary), Dno
+from Employee
+where Fname like 'a%'
+group by Dno 
+having SUM(Salary) >1000
+
+select MAX(Salary), Sex
+from Employee
+where Dno in (10,30)
+group by Sex
+having COUNT(SSN)>3
+
+select SUM(Salary), D.Dname, D.Dnum
+from Employee E inner join Departments D
+on E.Dno=D.Dnum
+group by D.Dnum, D.Dname
