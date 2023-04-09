@@ -51,3 +51,88 @@ inner join Project P
 on W.Pno=P.Pnumber
 where W.Hours >=15
 
+select Fname+' '+ Lname as Full_name, Pname, Hours
+from Employee E inner join Works_for W
+on E.SSN=W.ESSn
+inner join Project P 
+on W.Pno=P.Pnumber
+where E.Sex='M' and W.Hours >10
+
+update Works_for
+set Hours+=5
+from Employee E inner join Works_for W
+on E.SSN=W.ESSn
+
+
+-- replace null 
+select ISNULL(Dno, '')
+from Employee
+
+select ISNULL(Fname, Lname)
+from Employee
+
+
+---- multiple option, if first name doesn't exist, show last name. if last name doesn't exsit show address, if not show no data
+select Coalesce(Fname, Lname, Address, 'No data')
+from Employee
+
+
+---concatinate two columns of different data type 
+select Fname+' '+ CONVERT(varchar(50),Salary)
+from Employee
+
+--if one value is null the concatination will be null
+select ISNULL(Fname,' ') + ' ' + ISNULL(CONVERT(varchar(50),Salary),0)
+from Employee
+
+--the above function has alot of functions inside which will effect performance, we can do the function below instead
+-- concat transfer everything to string and replace null values with empty string
+select CONCAT(Fname, ' ', Salary)
+from Employee
+
+
+
+---end with a
+select *
+from Employee
+where Fname like '%a'
+
+---start with a
+select *
+from Employee
+where Fname like 'a%'
+
+---a anywhere
+select *
+from Employee
+where Fname like '%a%'
+
+--a is second
+select *
+from Employee
+where Fname like '_a%'
+
+
+---order by first select choice
+select Fname, Lname,Salary
+from Employee
+order by 1
+
+select Fname, Lname,Salary
+from Employee
+order by 3
+
+select Fname, Lname,Salary
+from Employee
+order by 3 desc
+
+select Fname, Lname,Salary
+from Employee
+order by Fname,Salary desc
+
+select Fname, Dname
+from Employee E inner join Departments D
+on E.Superssn=D.MGRSSN
+
+
+
