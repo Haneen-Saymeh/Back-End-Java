@@ -74,3 +74,27 @@ select SUM(Salary), D.Dname, D.Dnum
 from Employee E inner join Departments D
 on E.Dno=D.Dnum
 group by D.Dnum, D.Dname
+
+
+select * from Employee
+
+
+select SUM(Salary), Dno 
+from Employee
+group by Dno
+
+select SUM(Salary), Dno 
+from Employee
+where Salary>1000
+group by Dno
+
+select SUM(Salary), Dno
+from Employee
+group by Dno
+having SUM(Salary)>3000
+
+select SUM(Salary), Dno
+from Employee
+where Salary>1000
+group by Dno
+having SUM(Salary)>3000
