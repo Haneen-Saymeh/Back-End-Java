@@ -98,3 +98,6 @@ from Employee
 where Salary>1000
 group by Dno
 having SUM(Salary)>3000
+
+select SUBSTRING(Fname,1,3)
+from Employee
