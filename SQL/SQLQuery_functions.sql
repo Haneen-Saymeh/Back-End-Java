@@ -101,3 +101,24 @@ having SUM(Salary)>3000
 
 select SUBSTRING(Fname,1,3)
 from Employee
+
+select *
+from Employee
+---first three onl, not like order by with values 
+select top(3) *
+from Employee
+
+select top(3) Salary
+from Employee
+
+select top(3) Salary
+from Employee
+order by Salary desc
+
+
+select MAX(Salary)
+from Employee
+
+select top(1) Salary
+from Employee
+order by Salary desc
