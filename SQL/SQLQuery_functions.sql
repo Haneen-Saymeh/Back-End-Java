@@ -203,3 +203,30 @@ where 1=2
 
 select * 
 from empty_table
+
+
+select Fname
+from Employee
+
+select RIGHT(Fname,3)
+from Employee
+
+select Left(Fname,3)
+from Employee
+--- insert based select, copying values in an empty existing table with similar structure 
+insert into empty_table
+select * from Employee
+
+select *
+from Employee
+
+insert into Employee
+values('Han', 'Sol', 666, Null, 'Nablus', 'F', 1500, Null, Null)
+
+
+--- Ranking functions
+select *, ROW_NUMBER() over (order by Salary desc) as RN,  
+DENSE_RANK() over (order by Salary desc) as DR,
+NTILE(3) over (order by Salary desc) as groups,
+RANK() over (order by Salary desc) as rank
+from Employee
