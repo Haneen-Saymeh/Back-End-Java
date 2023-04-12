@@ -297,8 +297,16 @@ select FORMAT(GETDATE(), 'hh tt')
 select FORMAT(eomonth(GETDATE()), 'dd')
 select FORMAT(eomonth(GETDATE()), 'dddd')
 
+create schema HR
+
+alter schema HR transfer new_table
+
+select * from HR.new_table
+
+create synonym HN for HR.new_table
 
 
+select * from HN
 
 
 
