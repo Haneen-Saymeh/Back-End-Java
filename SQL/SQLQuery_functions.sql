@@ -230,3 +230,76 @@ DENSE_RANK() over (order by Salary desc) as DR,
 NTILE(3) over (order by Salary desc) as groups,
 RANK() over (order by Salary desc) as rank
 from Employee
+
+select *
+from (select *, ROW_NUMBER() over (order by Salary desc) as RN  
+from Employee) as new_table
+where RN=1
+
+
+select *
+from (select *, DENSE_RANK() over (order by Salary desc) as DR  
+from Employee) as new_table
+where DR=4
+
+
+
+
+select *, ROW_NUMBER() over (partition by Dno order by Salary desc) as RN,
+DENSE_RANK() over (partition by Dno order by Salary desc) as DR
+from Employee
+
+select *
+from (select *, DENSE_RANK() over (partition by Dno order by Salary desc) as DR  
+from Employee) as new_table
+where DR=1
+
+
+update Employee 
+set Dno=30
+where SSN=666
+
+
+select Fname + ' '+ Lname as fullName, Salary,
+CASE
+   when Salary >2000  then 'high salary'
+   when Salary <2000 then 'low salary'
+   else 'no value'
+END AS  salary_status
+from Employee
+
+update Employee
+set Salary=
+case 
+when Salary >2000 then Salary*1
+else Salary*1.2
+end
+
+select Fname, iif(Salary >2000, 'high','low')
+from Employee
+
+select CAST(GETDATE() as varchar(20))
+
+select CONVERT(varchar(20), GETDATE(),102)
+select CONVERT(varchar(20), GETDATE(),103)
+select CONVERT(varchar(20), GETDATE(),104)
+select CONVERT(varchar(20), GETDATE(),105)
+
+select FORMAT(GETDATE(), 'dd-MM-yyyy')
+select FORMAT(GETDATE(), 'dddd MMMM yyyy')
+select FORMAT(GETDATE(), 'dddd')
+select FORMAT(GETDATE(), 'MMMM')
+select FORMAT(GETDATE(), 'hh:mm:ss')
+select FORMAT(GETDATE(), 'HH')
+select FORMAT(GETDATE(), 'hh tt')
+
+
+select FORMAT(eomonth(GETDATE()), 'dd')
+select FORMAT(eomonth(GETDATE()), 'dddd')
+
+
+
+
+
+
+
