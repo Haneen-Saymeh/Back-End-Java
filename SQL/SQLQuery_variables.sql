@@ -125,4 +125,80 @@ insert into parent values(1)
 insert into parent values(2)
 insert into parent values(3)
 
+select * from parent
+insert into child values(1)
+insert into child values(3)
+insert into child values(5)
+--- only 1 and three has been entered
+select * from child
 
+truncate table child
+
+---- we can batch insert in child table, but rollback will undo the process
+begin transaction 
+insert into child values(1)
+insert into child values(2)
+insert into child values(3)
+rollback
+
+begin transaction 
+insert into child values(1)
+insert into child values(2)
+insert into child values(3)
+commit
+
+
+--if number is right according to the super class it will work
+
+begin try
+begin transaction 
+insert into child values(1)
+insert into child values(2)
+insert into child values(3)
+commit
+end try
+
+begin catch
+rollback
+end catch
+
+
+begin try
+begin transaction 
+insert into child values(1)
+insert into child values(5)
+insert into child values(3)
+commit
+end try
+
+begin catch
+rollback
+end catch
+
+
+truncate table child
+select * from child
+
+------------------------------------------------
+--- some of built in function
+
+select len(Fname), Fname
+from Employee
+
+select * from Employee
+
+select top(1) Fname
+from Employee
+order by len(Fname) desc
+
+---- user defined function 
+
+create function getsname(@id int) ---function signature
+returns varchar(20)
+begin
+declare @name varchar(20)
+select @name= Fname from Employee where SSN=@id ----------body of the function
+return @name
+end
+
+select dbo.getsname(666)
