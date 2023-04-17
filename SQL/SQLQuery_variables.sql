@@ -202,3 +202,94 @@ return @name
 end
 
 select dbo.getsname(666)
+
+---- function return table
+
+create function getemployees(@id int)
+returns table
+as
+return 
+(
+select Fname, Salary from Employee where Dno=@id
+)
+
+select * from getemployees(20)
+select Fname from getemployees(20)
+select sum(Salary) from getemployees(20)
+
+
+------- multistatment function
+
+create function getmany(@fomrat varchar(20))
+returns @t table (
+id int,
+name varchar(20)
+)
+
+as 
+begin 
+if @fomrat='first'
+insert into @t
+select SSN, Fname from Employee
+else if @fomrat='last'
+insert into @t
+select SSN, Lname from Employee
+else if @fomrat = 'full'
+insert into @t
+select SSN,Fname + ' ' + Lname as full_name from Employee
+return 
+end
+
+select * from getmany('full')
+
+---------------------------------------------
+
+--- windwoing functions
+--- lead, lag, first_value, last_value
+--- lead: someone who has more salary than the specific person , higher value
+--- lag: lower value than the speicif person 
+select Fname, Salary, 
+x= lead(Salary) over(order by Salary),
+y= lag(Salary) over(order by Salary)
+
+from Employee
+
+
+select Fname, Salary, 
+x= lead(Fname) over(order by Salary),
+y= lag(Fname) over(order by Salary)
+from Employee
+
+select * from
+(select Fname, Salary, 
+x= lead(Fname) over(order by Salary),
+y= lag(Fname) over(order by Salary)
+from Employee) as new_table
+where Fname='Han'
+
+
+select Fname, Salary, Dno,
+x= lead(Fname) over(partition by Dno order by Salary),
+y= lag(Fname) over(partition by Dno order by Salary)
+from Employee
+
+
+select Fname, Salary, 
+first= FIRST_VALUE(Salary) over(order by Salary),
+last= LAST_VALUE(Salary) over(order by Salary)
+from Employee
+
+
+select Fname, Salary, 
+first= FIRST_VALUE(Fname) over(order by Salary),
+last= LAST_VALUE(Fname) over(order by Salary),
+leader= lead(Fname) over(order by Salary),
+lagger= lag(Fname) over(order by Salary)
+from Employee
+
+select Fname, Salary, Dno,
+first= FIRST_VALUE(Fname) over(partition by Dno order by Salary),
+last= LAST_VALUE(Fname) over(partition by Dno order by Salary),
+leader= lead(Fname) over(partition by Dno order by Salary),
+lagger= lag(Fname) over(partition by Dno order by Salary)
+from Employee
