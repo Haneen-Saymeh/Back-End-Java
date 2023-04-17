@@ -93,4 +93,36 @@ id int,
 age int,
 )
 
+--- try and catch
+
+begin try
+delete from Departments where Dnum=30
+end try
+
+begin catch
+select 'error'
+select ERROR_LINE(), ERROR_NUMBER(),  ERROR_MESSAGE()
+end catch
+
+
+--- while loop//// breeak and continue leave the while lopp
+declare @x int =10
+while @x<=20
+begin
+set @x +=1
+if @x =14
+continue 
+if @x=16
+break
+select @x
+end
+
+create table parent(pid int primary key)
+create table child(cid int foreign key references
+parent(pid))
+
+insert into parent values(1)
+insert into parent values(2)
+insert into parent values(3)
+
 
