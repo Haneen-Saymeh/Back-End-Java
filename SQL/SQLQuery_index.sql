@@ -26,3 +26,18 @@ on Employee(Salary)
 --- tools help us to find column that will be used for searching most, to make clustered 
 --- sql server profiler
 --- sql server tunin advisor
+
+
+
+------ this is an example of local table, which is saved on tempdb
+create table #exam (
+id int,
+name varchar(20)
+)
+
+
+--- global tables
+create table ##exam(
+idd int,
+name varchar(20)
+)
