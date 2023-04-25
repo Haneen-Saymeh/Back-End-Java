@@ -215,6 +215,72 @@ select * from deleted
 insert into tab1 (SSN, Fname, Salary)
 values (333,'Rose', 2000)
 
+-- not allowing deletion on Friday
+
+create trigger t10
+on tab1
+after delete
+as 
+if FORMAT(GETDATE(), 'dddd')='Friday'
+begin
+select 'not allowed'
+-- or rollback
+insert into tab1
+ select * from deleted
+ end
+
+ create trigger t11
+ on tab1
+instead of delete  -- instead of doesn't allow delete
+as 
+if FORMAT(GETDATE(), 'dddd')!='Friday'
+begin
+delete from tab1 where SSN=(select SSN from deleted)
+end
+
+
+---deleted and inserted are volatile, not saved on database
+--- if we want to save in our db name of user, date for update ..etc
+
+create table history(
+username varchar(20),
+dateof date,
+old_id int,
+new_id int
+)
+
+
+create trigger t12
+on tab1
+instead of update
+as 
+if update(SSN)
+begin
+declare @old int, @new int
+select @old= SSN from deleted
+select @new = SSN from inserted
+insert into history
+values (SUSER_NAME(), GETDATE(), @old, @new)
+end
+
+update tab1
+set SSN=555
+
+select * from history
+
+select * from tab1
+
+select * from HR.empty_table
+---- examples of run time triggers AKA output
+delete from HR.empty_table
+output SUSER_NAME(), deleted.Fname
+where SSN=112233
+
+update HR.empty_table
+set Salary +=1000
+output SUSER_NAME(), inserted.Fname
+where SSN=223344
+
 
 
 
