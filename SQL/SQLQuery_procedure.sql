@@ -32,3 +32,13 @@ insertinto 757,'Thanos'
 
 getEmp
 
+
+create proc sumvalues @x int, @y int
+as
+select @x+@y
+
+sumvalues 10,5   ---calling parameters by position x=10, y=5
+
+sumvalues @x=6, @y=3  ---calling parameter by name
+
+
