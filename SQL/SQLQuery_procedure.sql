@@ -272,6 +272,7 @@ select * from tab1
 
 select * from HR.empty_table
 ---- examples of run time triggers AKA output
+--- inserted and deleted are used with triggers and output
 delete from HR.empty_table
 output SUSER_NAME(), deleted.Fname
 where SSN=112233
