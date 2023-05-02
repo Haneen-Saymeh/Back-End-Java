@@ -20,5 +20,14 @@ public class TrackCoash implements Coach {
 		
 		return "just do this! " + fortuneService.getFortune();
 	}
+	
+	public void startMyThings() {
+		System.out.println("start my things method");
+	}
+	
+	public void destroyMyThings() {
+		System.out.println("destroy my things method");
+	}
+	
 
 }

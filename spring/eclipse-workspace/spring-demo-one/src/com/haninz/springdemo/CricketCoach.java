@@ -26,6 +26,18 @@ public class CricketCoach implements Coach {
 
 
 
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+
+
+	public String getTeam() {
+		return team;
+	}
+
+
+
 	public void setFortuneService(FortuneService fortuneService) {
 		System.out.println("cricket coach: inside setter!");
 		this.fortuneService = fortuneService;
