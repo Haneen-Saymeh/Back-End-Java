@@ -93,3 +93,4 @@ end
 select @counter
 close c1
 deallocate c1
+
