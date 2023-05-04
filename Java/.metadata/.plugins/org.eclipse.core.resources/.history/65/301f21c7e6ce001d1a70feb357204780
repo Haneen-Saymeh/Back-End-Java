@@ -1,5 +1,0 @@
-package abstractClass;
-
-public class Camera extends Machine {
-
-}
