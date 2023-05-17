@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.luv2code.springdemo.entity.Customer;
 
+@Repository
 public class CustomerDaoImpl implements CustomerDAO {
 	
 	// inject session factory
@@ -17,17 +21,29 @@ public class CustomerDaoImpl implements CustomerDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public List<Customer> getCustomers() {
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		// create a query
 		
+		Query<Customer> query= currentSession.createQuery("from Customer order by lastName", Customer.class);
+		
 		// execute a query and get result list
 		
+		List<Customer> customers=query.getResultList();
+		
 		// return the results
-		return null;
+		return customers;
 	}
+
+	@Override
+	public void saveCustomer(Customer theCustomer) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.save(theCustomer);
+		
+	}
+
+
 
 }
