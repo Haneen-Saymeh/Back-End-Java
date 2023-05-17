@@ -59,8 +59,9 @@
 						
 						<td>
 							<!-- display the update link -->
-							<a href="${tempCustomer.id}">Update</a>
+							<a href="${tempCustomer.id}">Update</a> |  <a href="del/${tempCustomer.id}"   onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
 						</td>
+						
 						
 					</tr>
 				
