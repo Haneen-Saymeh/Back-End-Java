@@ -27,6 +27,7 @@
 		<h3>Save Customer</h3>
 	
 		<form:form action="add" modelAttribute="customer" method="POST">
+		<form:input type="hidden"  path="id" value="${customer.id}"/>
 		
 			<table>
 				<tbody>
