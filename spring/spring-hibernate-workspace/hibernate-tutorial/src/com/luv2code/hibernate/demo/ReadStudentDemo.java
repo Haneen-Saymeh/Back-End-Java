@@ -25,6 +25,7 @@ public class ReadStudentDemo {
 			Student tempStudent = new Student("Daffy", "Duck", "daffy@sth.com");
 			// start a transaction
 			session.beginTransaction();
+			
 			// save the student object
 			System.out.println("save the studen object");
 			System.out.println(tempStudent);
