@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luv2code.springdemo.entity.Customer;
@@ -56,7 +57,18 @@ public class CustomerRestController {
 		return theCustomer;
 	}
 	
+	// another method for update
 	
+	@PutMapping("/customers/{id}")
+    public Customer update(@PathVariable("id") int id, @RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName, @RequestParam(value="email") String email) {
+		Customer theCustomer = customerService.getCustomer(id);
+		if(theCustomer==null) {
+			throw new CustomerNotFoundException("Customer id not found: "+id);
+		}
+		
+		customerService.saveCustomer(theCustomer);
+        return theCustomer;
+    }
 	
 	
 	
