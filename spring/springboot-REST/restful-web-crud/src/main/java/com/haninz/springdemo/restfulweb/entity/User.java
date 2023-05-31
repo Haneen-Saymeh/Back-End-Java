@@ -2,9 +2,15 @@ package com.haninz.springdemo.restfulweb.entity;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 public class User {
 	
+	@Size(min=3, message="should have at least 3 characters")
 	private String name;
+	
+	@Past(message="Birth date should be in the past!")
 	private LocalDate birthDate;
 	
 	

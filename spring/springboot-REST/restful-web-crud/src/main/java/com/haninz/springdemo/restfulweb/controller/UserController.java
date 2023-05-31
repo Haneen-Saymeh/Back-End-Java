@@ -17,6 +17,8 @@ import com.haninz.springdemo.restfulweb.DaoService.UserDaoService;
 import com.haninz.springdemo.restfulweb.entity.User;
 import com.haninz.springdemo.restfulweb.entity.UserNotFoundResponse;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class UserController {
 	@Autowired
@@ -43,7 +45,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<User> addUser(@RequestBody User user){
+	public ResponseEntity<User> addUser(@Valid @RequestBody User user){
 		User savedUser= userService.saveUser(user);
 //		int id = indexOf(savedUser);
 	
