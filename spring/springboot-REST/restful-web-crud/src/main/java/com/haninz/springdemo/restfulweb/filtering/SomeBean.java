@@ -1,14 +1,16 @@
 package com.haninz.springdemo.restfulweb.filtering;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties("field1")
+//@JsonIgnoreProperties("field1")
+@JsonFilter("somebeanfilter")
 public class SomeBean {
 	
 	public String field1;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	public String field2;
 	
 	public String field3;
