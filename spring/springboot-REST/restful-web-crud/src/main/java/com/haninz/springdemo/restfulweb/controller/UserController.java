@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import com.haninz.springdemo.restfulweb.DaoService.UserDaoService;
 import com.haninz.springdemo.restfulweb.entity.User;
 import com.haninz.springdemo.restfulweb.entity.UserNotFoundResponse;
@@ -34,14 +37,17 @@ public class UserController {
 	
 	
 	@GetMapping("/users/{id}")
-	public User findOneUser(@PathVariable int id){
+	public EntityModel<User> findOneUser(@PathVariable int id){
 		
 		List<User> theUsers= userService.findUsers();
+		User user= userService.findUser(id);
 		if(id > theUsers.size() || id <0) {
 			throw new UserNotFoundResponse("User not Found!");
 		}
-		
-		return userService.findUser(id);
+		EntityModel<User> entity = EntityModel.of(user);
+		WebMvcLinkBuilder link= linkTo(methodOn(this.getClass()).findThemUsers());
+		entity.add(link.withRel("all-users"));
+		return entity;
 		
 		
 	}
