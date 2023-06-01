@@ -17,20 +17,24 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
-import com.haninz.springdemo.restfulweb.DaoService.UserDaoService;
+
+import com.haninz.springdemo.restfulweb.entity.Post;
 import com.haninz.springdemo.restfulweb.entity.User;
 import com.haninz.springdemo.restfulweb.entity.UserNotFoundResponse;
+import com.haninz.springdemo.restfulweb.repositories.PostRepository;
 import com.haninz.springdemo.restfulweb.repositories.UserRepository;
 
 import jakarta.validation.Valid;
 
 @RestController
 public class UserController {
-	@Autowired
-	private UserDaoService userService;
+	
 	
 	@Autowired
 	private UserRepository repo;
+	
+	@Autowired
+	private PostRepository Postrepo;
 	
 	
 	
@@ -60,17 +64,13 @@ public class UserController {
 		User savedUser= repo.save(user);
 //		int id = indexOf(savedUser);
 	
-		URI location= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(indexOf(savedUser)).toUri();
+		URI location= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
 		return ResponseEntity.created(location).build();
 		
 	}
 
 
-	private int indexOf(User savedUser) {
-		List<User> theUsers= userService.findUsers();
-		int id=theUsers.indexOf(savedUser);
-		return id;
-	}
+	
 	
 	@DeleteMapping("/users/{id}")
 	public String deleteUser(@PathVariable int id) {
@@ -78,5 +78,24 @@ public class UserController {
 		repo.delete(user.get());
 		return "User has been deleted: " + id;
 	}
+	
+	@GetMapping("/users/{id}/posts")
+	public List<Post> getPosts(@PathVariable int id){
+		Optional<User> user = repo.findById(id);
+		List<Post> posts=user.get().getPosts();
+		return posts;
+		
+	}
+	
+	@PostMapping("/users/{id}/posts")
+	public void addPosts(@PathVariable int id, @Valid @RequestBody Post post) {
+		Optional<User> user = repo.findById(id);
+		post.setUser(user.get());
+		Post savedPost = Postrepo.save(post);
+//		List<Post> userPosts= user.get().getPosts();
+//		userPosts.add(post);
+		
+	}
+	
 
 }

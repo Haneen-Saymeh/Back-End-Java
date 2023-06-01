@@ -45,6 +45,16 @@ public class Post {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	
+	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {
