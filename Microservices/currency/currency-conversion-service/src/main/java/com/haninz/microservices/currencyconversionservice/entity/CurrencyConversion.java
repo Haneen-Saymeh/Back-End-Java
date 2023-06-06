@@ -1,36 +1,31 @@
-package com.haninz.microservices.currencyexchangeservice.entity;
+package com.haninz.microservices.currencyconversionservice.entity;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-
-@Entity
-public class CurrencyExchange {
+public class CurrencyConversion {
 	
-	@Id
 	private Long id;
-	
-	@Column(name="currency_from")
 	private String from;
-	
-	@Column(name="currency_to")
 	private String to;
+	private BigDecimal quantity;
 	private BigDecimal conversionMultiple;
+	private BigDecimal totalCalculatedAmount;
 	private String environment;
 	
-	public CurrencyExchange() {
+	public CurrencyConversion() {
 		
 	}
 
-	public CurrencyExchange(Long id, String from, String to, BigDecimal conversionMultiple) {
+	public CurrencyConversion(Long id, String from, String to, BigDecimal quantity, BigDecimal conversionMultiple,
+			BigDecimal totalCalculatedAmount, String environment) {
 		
 		this.id = id;
 		this.from = from;
 		this.to = to;
+		this.quantity = quantity;
 		this.conversionMultiple = conversionMultiple;
+		this.totalCalculatedAmount = totalCalculatedAmount;
+		this.environment = environment;
 	}
 
 	public Long getId() {
@@ -57,12 +52,28 @@ public class CurrencyExchange {
 		this.to = to;
 	}
 
+	public BigDecimal getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(BigDecimal quantity) {
+		this.quantity = quantity;
+	}
+
 	public BigDecimal getConversionMultiple() {
 		return conversionMultiple;
 	}
 
 	public void setConversionMultiple(BigDecimal conversionMultiple) {
 		this.conversionMultiple = conversionMultiple;
+	}
+
+	public BigDecimal getTotalCalculatedAmount() {
+		return totalCalculatedAmount;
+	}
+
+	public void setTotalCalculatedAmount(BigDecimal totalCalculatedAmount) {
+		this.totalCalculatedAmount = totalCalculatedAmount;
 	}
 
 	public String getEnvironment() {
